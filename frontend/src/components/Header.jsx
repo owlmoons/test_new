@@ -100,7 +100,7 @@ const Header = (props) => {
       <div className="container-fluid">
         <a className="navbar-brand" href="/home">
           <img
-            src="https://en-news.tuj.ac.jp/wp-content/uploads/2023/04/tuj_news_logo.png"
+            src="https://hcmiu.edu.vn/wp-content/uploads/2017/02/logoweb-02.png"
             alt="temple Logo"
             className="d-inline align-left"
           />
