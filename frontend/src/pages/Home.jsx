@@ -33,7 +33,7 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
-  const [priceRange, setPriceRange] = useState([0, 1000]); // Default range
+  const [priceRange, setPriceRange] = useState([0, 1000000]); // Default range
 
   // Fetch products from the server
   const fetchProducts = async () => {
@@ -79,33 +79,6 @@ const Home = () => {
       product.price <= priceRange[1]
   );
 
-  // Handle product creation
-  const handleCreateProduct = async (values) => {
-    const formData = new FormData();
-
-    // Append text data to the FormData
-    formData.append("title", values.title);
-    formData.append("category", values.category);
-    formData.append("price", values.price);
-    formData.append("details", values.details);
-    formData.append("condition", values.condition);
-
-    // Append file data to the FormData
-    const file = values.image?.fileList[0]?.originFileObj;
-    if (file) {
-      formData.append("image", file);
-    }
-
-    try {
-      await ProductService.createProduct(formData);
-      message.success("Product created successfully!");
-      fetchProducts(); // Fetch products again after adding a new product
-      setIsModalVisible(false);
-      form.resetFields();
-    } catch (error) {
-      message.error("Failed to create product.");
-    }
-  };
 
   const showCreateProductModal = () => {
     setIsModalVisible(true);
@@ -153,7 +126,7 @@ const Home = () => {
               <Slider
                 range
                 min={0}
-                max={10000000}
+                max={5000000}
                 value={priceRange}
                 onChange={handlePriceRangeChange}
                 tipFormatter={(value) => `${value}`} // You can change the currency symbol
@@ -164,22 +137,7 @@ const Home = () => {
                 <span>Max Price: {priceRange[1]}</span>
               </div>
 
-              {/* Create Product Button */}
-              {loggedIn && (
-                <Button
-                  type="primary"
-                  icon={<PlusOutlined />}
-                  onClick={showCreateProductModal}
-                  style={{
-                    width: "100%",
-                    fontSize: "16px",
-                    borderRadius: "8px",
-                    marginTop: "16px",
-                  }}
-                >
-                  Create Product
-                </Button>
-              )}
+      
             </div>
           </Col>
 
@@ -196,80 +154,7 @@ const Home = () => {
           </Col>
         </Row>
 
-        {/* Create Product Modal */}
-        <Modal
-          title="Create New Product"
-          visible={isModalVisible}
-          onCancel={handleCancel}
-          footer={null}
-          centered
-          width={800}
-        >
-          <Form form={form} layout="vertical" onFinish={handleCreateProduct}>
-            <Row gutter={24}>
-              <Col span={12}>
-                <Form.Item
-                  label="Title"
-                  name="title"
-                  rules={[{ required: true, message: "Please input the title!" }]}
-                >
-                  <Input />
-                </Form.Item>
-                <Form.Item
-                  label="Category"
-                  name="category"
-                  rules={[{ required: true, message: "Please input the category!" }]}
-                >
-                  <Input />
-                </Form.Item>
-
-                <Form.Item
-                  label="Product Image"
-                  name="image"
-                  rules={[{ required: true, message: "Please upload an image!" }]}
-                >
-                  <Upload listType="picture-card" beforeUpload={() => false} maxCount={1}>
-                    <Button icon={<PlusOutlined />}>Upload</Button>
-                  </Upload>
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  label="Price"
-                  name="price"
-                  rules={[{ required: true, message: "Please input the price!" }]}
-                >
-                  <InputNumber min={0} style={{ width: "100%" }} />
-                </Form.Item>
-                <Form.Item
-                  label="Condition"
-                  name="condition"
-                  rules={[{ required: true, message: "Please input the condition!" }]}
-                >
-                  <Input />
-                </Form.Item>
-                <Form.Item
-                  label="Details"
-                  name="details"
-                  rules={[{ required: true, message: "Please input the details!" }]}
-                >
-                  <ReactQuill
-                    theme="snow"
-                    onChange={(value) => form.setFieldsValue({ details: value })}
-                    style={{ height: "150px" }}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Form.Item>
-              <Space>
-                <Button type="primary" htmlType="submit">
-                  Create Product
-                </Button>
-              </Space>
-            </Form.Item>
-          </Form>
-        </Modal>
+    
     </div>
   );
 };
