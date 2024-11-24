@@ -7,7 +7,7 @@ import "react-quill/dist/quill.snow.css";
 
 const { Column } = Table;
 
-const Product = () => {
+const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -207,4 +207,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default ProductPage;

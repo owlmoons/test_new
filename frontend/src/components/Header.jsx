@@ -37,7 +37,7 @@ const Header = () => {
 
   return (
     <AntHeader style={{ backgroundColor: "#001529", display: "flex", alignItems: "center", padding: "0 24px" }}>
-      <Link to="/home" style={{ display: "flex", alignItems: "center", textDecoration: "none", color: "#fff" }}>
+      <Link to="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", color: "#fff" }}>
         <img
           src="https://hcmiu.edu.vn/wp-content/uploads/2017/02/logoweb-02.png"
           alt="Logo"
