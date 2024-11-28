@@ -14,7 +14,7 @@ const UsernameSignupPage = () => {
     const { email, credential } = location.state || {};
 
     if (!email || !credential) {
-        navigate('/signup'); // Redirect if no email is found
+        navigate('/signup');
         return null;
     }
 
@@ -94,7 +94,7 @@ const UsernameSignupPage = () => {
 
                 <Button
                     type="default"
-                    onClick={() => navigate('/signup')} // Navigate back to the signup page
+                    onClick={() => navigate('/signup')} 
                     block
                     style={{
                         height: '48px',
